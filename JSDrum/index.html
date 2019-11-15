@@ -59,8 +59,10 @@
 
 <script>
     window.addEventListener('keydown',function(e) {
+
     const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`)
     const key = document.querySelector(`div[data-key="${e.keyCode}"]`)
+
     if(!audio) return; //If we get null function will stops
     //Add class without overwriting first one
     key.classList.add('playing')
@@ -71,11 +73,13 @@
    })
    window.addEventListener('keyup',function(e){
     const key = document.querySelector(`div[data-key="${e.keyCode}"]`)
+    
     //Dlete only this .playing class
     key.classList.remove('playing')
    })
    //Set Elements by getting from html in an array
    const array = Array.from(document.querySelectorAll(".key"))
+   
    //Just for checking 
    console.log(array)
 </script>

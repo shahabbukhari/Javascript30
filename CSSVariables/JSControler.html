@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JSControler With CSS Variables</title>
+</head>
+<body>
+    
+    <p>Update CSS Variables with <span class="h1"> JS </span></p>
+
+    <div class="options">
+        <!-- For Spacing Option  -->
+        <label for="spacing">Spacing</label>
+        <input type="range" id="spacing" name="spacing" min="10" max="250" data-sizing="px" value="10">
+
+        <!-- For Bluring Options  -->
+        <label for="Blur">Blur</label>
+        <input type="range" name="blur" id="blur" min="0" max="250"  value="10" data-sizing="px">
+
+        <!-- For Base Color -->
+        <label for="base-color">Base Color</label>
+        <input type="color" value="3787" id="base" name="base">
+    </div>
+
+    <img src="https://images.pexels.com/photos/169647/pexels-photo-169647.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="City" id="city">
+
+    <style>
+     :root {
+         --base: yellow;
+         --blur: 0px;
+         --spacing: 10px;
+     }   
+
+    body {
+        font-family: 'helvetica neue', sans-serif;
+        background: rgb(77, 0, 77);
+        text-align: center;
+        font-size: 40px;
+        color: white;
+        font-weight: bold;
+    }
+
+    .h1 {
+        color: var(--base);
+    }
+
+    input {
+        width: 100px;
+    }
+
+    .options {
+        margin-bottom:30px;
+    }
+
+    #city {
+        width: 50%;
+        padding: var(--spacing);
+        background-color: var(--base);
+        filter: blur(var(--blur));
+        margin-left: 25%;
+        margin-right: 25%;
+    }
+    </style> 
+    <script>
+        //Its gives us an node list of input
+        const inputs = document.querySelectorAll('.options input');
+
+        function updatedata() {
+            //it gives us data attribute values
+            const suffix = this.dataset.sizing || '';
+            document.documentElement.style.setProperty(`--${this.name}`,this.value + suffix)
+
+            console.log(this.name)
+        }
+
+
+        inputs.forEach(input => {
+            //
+            input.addEventListener('change',updatedata);
+        });
+        inputs.forEach(input => {
+            //mousemove capture all data when you move a slider
+            input.addEventListener('mousemove',updatedata)
+        })
+    </script>
+</body>
+</html>
